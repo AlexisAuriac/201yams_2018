@@ -30,6 +30,6 @@ def get_nb_combinations2(n, k)
     return factorial(k + n - 1) / (factorial(k) * factorial(n - 1))
 end
 
-# puts(factorial(3))
-# puts(get_nb_combinations(3, 3))
-# puts(get_nb_combinations2(6, 5))
+puts(factorial(3))
+puts(get_nb_combinations(3, 3))
+puts(get_nb_combinations2(6, 5))
