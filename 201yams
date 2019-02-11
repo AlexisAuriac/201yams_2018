@@ -12,3 +12,24 @@ if (ARGV.length == 1 && ARGV[0] == "-h")
     puts("  d5  value of the fifth die (0 if not thrown)")
     puts("  c   expected combination")
 end
+
+def factorial(size_set)
+    fact = 1
+    size_set.times do |n|
+        fact *= n + 1
+    end
+    return fact
+end
+
+def get_nb_combinations(n, k)
+    return factorial(n) / (factorial(k) * factorial(n - k))
+end
+
+# with repetitions
+def get_nb_combinations2(n, k)
+    return factorial(k + n - 1) / (factorial(k) * factorial(n - 1))
+end
+
+# puts(factorial(3))
+# puts(get_nb_combinations(3, 3))
+# puts(get_nb_combinations2(6, 5))
