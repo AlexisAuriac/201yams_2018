@@ -31,15 +31,17 @@ def getDice(argv)
     return dice
 end
 
-# def getComb(str)
-    # puts(str)
-# end
+def getComb(str)
+    split_str = str.split('_', 2)
+
+    return split_str[0], split_str[1]
+end
 
 module Parameters
     def Parameters.parse_parameters(argv)
         dice = []
         comb = ""
-        options = []
+        options = ""
 
         if argv.length == 1 and argv[0] == "-h"
             usage()
@@ -49,7 +51,7 @@ module Parameters
         end
 
         dice = getDice(argv)
-        # comb = getComb(argv[5])
+        comb, options = getComb(argv[5])
 
         return dice, comb, options
     end

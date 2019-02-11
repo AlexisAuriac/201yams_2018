@@ -4,3 +4,7 @@ require "./parameters.rb"
 require "./combinaisons.rb"
 
 dice, comb, options = Parameters.parse_parameters(ARGV)
+
+puts(dice)
+puts(comb)
+puts(options)
