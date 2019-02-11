@@ -5,6 +5,17 @@ require "./combinaisons.rb"
 
 dice, comb, options = Parameters.parse_parameters(ARGV)
 
-puts(dice)
-puts(comb)
-puts(options)
+case comb
+when "pair"
+    Combinaisons.pair(dice, options)
+when "three"
+    Combinaisons.three(dice, options)
+when "four"
+    Combinaisons.four(dice, options)
+when "full"
+    Combinaisons.full(dice, options)
+when "straight"
+    Combinaisons.straight(dice, options)
+when "yams"
+    Combinaisons.yams(dice, options)
+end
