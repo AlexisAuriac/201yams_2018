@@ -1,3 +1,5 @@
+require "./combinaisons.rb"
+
 def usage()
     puts("USAGE")
     puts("  ./201yams d1 d2 d3 d4 d5 c")
@@ -33,6 +35,11 @@ end
 
 def getComb(str)
     split_str = str.split('_', 2)
+
+    if not Combinaisons.combinaisons_str.include?(split_str[0])
+        STDERR.puts("Unknown combination")
+        exit(84)
+    end
 
     return split_str[0], split_str[1]
 end
