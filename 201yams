@@ -19,3 +19,5 @@ when "straight"
 when "yams"
     Combinaisons.yams(dice, options)
 end
+
+exit(0)

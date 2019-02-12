@@ -41,14 +41,20 @@ def getComb(str)
         exit(84)
     end
 
-    return split_str[0], split_str[1]
+    if str[-1] == '_'
+       STDERR.puts("Invalid options")
+       exit(84)
+    end
+
+    puts(split_str)
+    return split_str[0], split_str[1].split('_')
 end
 
 module Parameters
     def Parameters.parse_parameters(argv)
         dice = []
         comb = ""
-        options = ""
+        options = []
 
         if argv.length == 1 and argv[0] == "-h"
             usage()
