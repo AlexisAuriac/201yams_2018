@@ -46,8 +46,11 @@ def getComb(str)
        exit(84)
     end
 
-    puts(split_str)
-    return split_str[0], split_str[1].split('_')
+    if split_str.length > 1
+        return split_str[0], split_str[1].split('_')
+    else
+        return split_str[0], []
+    end
 end
 
 module Parameters
