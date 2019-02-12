@@ -1,3 +1,32 @@
+require "./utilities.rb"
+
+PA = 1.0 / 6.0
+NB_DICE = 5
+
+def multiple(dice, options, nb_roll, name_comb)
+    if options.length != 1 or not /^[1-6]$/ =~ options[0]
+        STDERR.puts("Invalid options")
+        exit(84)
+    end
+
+    roll = options[0].to_i
+    nb_done = dice.count(roll)
+
+    nb_dice = NB_DICE - nb_done
+    nb_roll -= nb_done
+
+    prob = 0
+    for i in nb_roll...(nb_dice + 1)
+        nb_comb = Utilities.combinations(nb_dice, i)
+        p1 = PA ** i
+        p2 = (1 - PA) ** (nb_dice - i)
+        prob += nb_comb * p1 * p2
+    end
+    prob *= 100
+
+    printf("chances to get a %d %s: %.2f%\n", roll, name_comb, prob)
+end
+
 module Combinaisons
     def Combinaisons.combinaisons_str
        return [
@@ -11,15 +40,15 @@ module Combinaisons
     end
 
     def Combinaisons.pair(dice, options)
-        puts("TODO")
+        multiple(dice, options, 2, "pair")
     end
 
     def Combinaisons.three(dice, options)
-        puts("TODO")
+        multiple(dice, options, 3, "three-of-a-kind")
     end
 
     def Combinaisons.four(dice, options)
-        puts("TODO")
+        multiple(dice, options, 4, "four-of-a-kind")
     end
 
     def Combinaisons.full(dice, options)
@@ -31,14 +60,6 @@ module Combinaisons
     end
 
     def Combinaisons.yams(dice, options)
-        if options.length != 1 or not /^[1-6]$/ =~ options[0]
-            STDERR.puts("Invalid options")
-            exit(84)
-        end
-
-        roll = options[0].to_i
-        nb_done = dice.count(roll)
-        prob = (1.0 / 6.0) ** (5 - nb_done) * 100
-        puts(sprintf("chances to get a %d yams: %.2f", roll, prob))
+        multiple(dice, options, 5, "yams")
     end
 end

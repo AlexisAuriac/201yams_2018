@@ -7,12 +7,12 @@ module Utilities
         return fact
     end
 
-    def Utilities.get_nb_combinations(n, k)
+    def Utilities.combinations(n, k)
         return factorial(n) / (factorial(k) * factorial(n - k))
     end
 
     # with repetitions
-    def Utilities.get_nb_combinations2(n, k)
+    def Utilities.rcombinations(n, k)
         return factorial(k + n - 1) / (factorial(k) * factorial(n - 1))
     end
 end
