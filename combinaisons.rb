@@ -15,15 +15,6 @@ def get_prob(nb_dice, nb_roll)
     return prob
 end
 
-def get_prob2(nb_dice, nb_roll)
-    nb_comb = Utilities.combinations(nb_dice, nb_roll)
-    p1 = PA ** nb_roll
-    p2 = (1 - PA) ** (nb_dice - nb_roll)
-    prob = nb_comb * p1 * p2
-
-    return prob
-end
-
 def get_n_of(dice, options, nb_roll, name_comb)
     if options.length != 1 or not /^[1-6]$/ =~ options[0]
         STDERR.puts("Invalid options")
