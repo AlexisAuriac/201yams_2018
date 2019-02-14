@@ -15,6 +15,15 @@ def get_prob(nb_dice, nb_roll)
     return prob
 end
 
+def get_prob2(nb_dice, nb_roll)
+    nb_comb = Utilities.combinations(nb_dice, nb_roll)
+    p1 = PA ** nb_roll
+    p2 = (1 - PA) ** (nb_dice - nb_roll)
+    prob = nb_comb * p1 * p2
+
+    return prob
+end
+
 def get_n_of(dice, options, nb_roll, name_comb)
     if options.length != 1 or not /^[1-6]$/ =~ options[0]
         STDERR.puts("Invalid options")
@@ -33,7 +42,7 @@ def get_n_of(dice, options, nb_roll, name_comb)
 
     prob = get_prob(nb_dice, nb_roll) * 100
 
-    printf("chances to get a %d %s: %.2f%\n", roll, name_comb, prob)
+    printf("chances to get a %d %s: %.2f%%\n", roll, name_comb, prob)
 end
 
 module Combinaisons
@@ -75,6 +84,40 @@ module Combinaisons
             STDERR.puts("The 2 options have the same value")
             exit(84)
         end
+
+        # nb_done1 = dice.count(roll1)
+        # nb_done2 = dice.count(roll2)
+        # nb_kept = [nb_done1, 2].min + [nb_done2, 3].min
+        # nb_dice = NB_DICE - nb_kept
+
+        # puts("nb_done1: #{nb_done1}")
+        # puts("nb_done2: #{nb_done2}")
+        # puts("nb_kept: #{nb_kept}")
+
+        # if nb_done1 >= 2
+        #     prob1 = 1.0
+        # else
+        #     # prob1 = (1.0 / 6.0) ** (2 - nb_done1)
+        #     prob1 = get_prob2(nb_dice, 2 - nb_done1)
+        # end
+
+        # if nb_done2 >= 3
+        #     prob2 = 1.0
+        # else
+        #     # prob2 = (1.0 / 6.0) ** (3 - nb_done2)
+        #     prob2 = get_prob2(nb_dice, 3 - nb_done2)
+        # end
+
+        # printf("chances to get a %d full of %d: %.2f%%\n",
+        #     roll1,
+        #     roll2,
+        #     prob1 * prob2 * 100.0)
+
+        printf("chances to get a %d full of %d: %.2f%%\n",
+            roll1,
+            roll2,
+            Utilities.combinations(5, 3) / 6.0 ** 5 * 100.0)
+
     end
 
     def Combinaisons.straight(dice, options)
