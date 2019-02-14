@@ -13,6 +13,7 @@ TESTS=(
     $TEST_DIR/tests_pair.sh
     $TEST_DIR/tests_three.sh
     $TEST_DIR/tests_four.sh
+    $TEST_DIR/tests_yams.sh
 )
 
 
