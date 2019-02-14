@@ -11,6 +11,7 @@ readonly RED="\033[0;31m"
 TESTS=(
     $TEST_DIR/tests_parameters.sh
     $TEST_DIR/tests_pair.sh
+    $TEST_DIR/tests_three.sh
 )
 
 
@@ -31,4 +32,6 @@ else
     echo -e "$RED""Failed $failed"
 fi
 
+
+## RETURN HOW MANY FAILED
 exit $failed
