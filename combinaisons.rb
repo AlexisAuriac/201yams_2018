@@ -3,7 +3,7 @@ require "./utilities.rb"
 PA = 1.0 / 6.0
 NB_DICE = 5
 
-def multiple(dice, options, nb_roll, name_comb)
+def get_n_of(dice, options, nb_roll, name_comb)
     if options.length != 1 or not /^[1-6]$/ =~ options[0]
         STDERR.puts("Invalid options")
         exit(84)
@@ -14,6 +14,10 @@ def multiple(dice, options, nb_roll, name_comb)
 
     nb_dice = NB_DICE - nb_done
     nb_roll -= nb_done
+
+    if nb_roll < 0
+        nb_roll = 0
+    end
 
     prob = 0
     for i in nb_roll...(nb_dice + 1)
@@ -40,15 +44,15 @@ module Combinaisons
     end
 
     def Combinaisons.pair(dice, options)
-        multiple(dice, options, 2, "pair")
+        get_n_of(dice, options, 2, "pair")
     end
 
     def Combinaisons.three(dice, options)
-        multiple(dice, options, 3, "three-of-a-kind")
+        get_n_of(dice, options, 3, "three-of-a-kind")
     end
 
     def Combinaisons.four(dice, options)
-        multiple(dice, options, 4, "four-of-a-kind")
+        get_n_of(dice, options, 4, "four-of-a-kind")
     end
 
     def Combinaisons.full(dice, options)
@@ -60,6 +64,6 @@ module Combinaisons
     end
 
     def Combinaisons.yams(dice, options)
-        multiple(dice, options, 5, "yams")
+        get_n_of(dice, options, 5, "yams")
     end
 end
