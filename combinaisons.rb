@@ -85,38 +85,15 @@ module Combinaisons
             exit(84)
         end
 
-        # nb_done1 = dice.count(roll1)
-        # nb_done2 = dice.count(roll2)
-        # nb_kept = [nb_done1, 2].min + [nb_done2, 3].min
-        # nb_dice = NB_DICE - nb_kept
-
-        # puts("nb_done1: #{nb_done1}")
-        # puts("nb_done2: #{nb_done2}")
-        # puts("nb_kept: #{nb_kept}")
-
-        # if nb_done1 >= 2
-        #     prob1 = 1.0
-        # else
-        #     # prob1 = (1.0 / 6.0) ** (2 - nb_done1)
-        #     prob1 = get_prob2(nb_dice, 2 - nb_done1)
-        # end
-
-        # if nb_done2 >= 3
-        #     prob2 = 1.0
-        # else
-        #     # prob2 = (1.0 / 6.0) ** (3 - nb_done2)
-        #     prob2 = get_prob2(nb_dice, 3 - nb_done2)
-        # end
-
-        # printf("chances to get a %d full of %d: %.2f%%\n",
-        #     roll1,
-        #     roll2,
-        #     prob1 * prob2 * 100.0)
+        nb_done1 = [dice.count(roll1), 3].min
+        nb_done2 = [dice.count(roll2), 2].min
+        nb_kept = nb_done1 + nb_done2
+        nb_dice = NB_DICE - nb_kept
 
         printf("chances to get a %d full of %d: %.2f%%\n",
             roll1,
             roll2,
-            Utilities.combinations(5, 3) / 6.0 ** 5 * 100.0)
+            Utilities.combinations(nb_dice, 3 - nb_done1) / 6.0 ** nb_dice * 100.0)
 
     end
 
