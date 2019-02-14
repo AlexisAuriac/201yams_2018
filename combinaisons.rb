@@ -89,7 +89,29 @@ module Combinaisons
     end
 
     def Combinaisons.straight(dice, options)
-        puts("TODO")
+        if options.length != 1 or not /^[56]$/ =~ options[0]
+            STDERR.puts("Invalid options")
+            exit(84)
+        end
+
+        last = options[0].to_i
+
+        nb_kept = 0
+        for i in 2..5
+            nb_kept += (dice.any? { |e| e == i }) ? 1 : 0
+        end
+
+        if last == 5
+            nb_kept += (dice.any? { |e| e == 1 }) ? 1 : 0
+        else
+            nb_kept += (dice.any? { |e| e == 6 }) ? 1 : 0
+        end
+
+        nb_dice = NB_DICE - nb_kept
+
+        printf("chances to get a %d straight: %.2f%%\n",
+            last,
+            Utilities.factorial(nb_dice) / 6.0 ** nb_dice * 100.0)
     end
 
     def Combinaisons.yams(dice, options)
