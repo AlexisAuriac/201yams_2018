@@ -3,6 +3,18 @@ require "./utilities.rb"
 PA = 1.0 / 6.0
 NB_DICE = 5
 
+def get_prob(nb_dice, nb_roll)
+    prob = 0
+    for i in nb_roll...(nb_dice + 1)
+        nb_comb = Utilities.combinations(nb_dice, i)
+        p1 = PA ** i
+        p2 = (1 - PA) ** (nb_dice - i)
+        prob += nb_comb * p1 * p2
+    end
+
+    return prob
+end
+
 def get_n_of(dice, options, nb_roll, name_comb)
     if options.length != 1 or not /^[1-6]$/ =~ options[0]
         STDERR.puts("Invalid options")
@@ -19,14 +31,7 @@ def get_n_of(dice, options, nb_roll, name_comb)
         nb_roll = 0
     end
 
-    prob = 0
-    for i in nb_roll...(nb_dice + 1)
-        nb_comb = Utilities.combinations(nb_dice, i)
-        p1 = PA ** i
-        p2 = (1 - PA) ** (nb_dice - i)
-        prob += nb_comb * p1 * p2
-    end
-    prob *= 100
+    prob = get_prob(nb_dice, nb_roll) * 100
 
     printf("chances to get a %d %s: %.2f%\n", roll, name_comb, prob)
 end
@@ -56,7 +61,20 @@ module Combinaisons
     end
 
     def Combinaisons.full(dice, options)
-        puts("TODO")
+        if options.length != 2 or
+            not /^[1-6]$/ =~ options[0] or
+            not /^[1-6]$/ =~ options[0]
+            STDERR.puts("Invalid options")
+            exit(84)
+        end
+
+        roll1 = options[0].to_i
+        roll2 = options[1].to_i
+
+        if roll1 == roll2
+            STDERR.puts("The 2 options have the same value")
+            exit(84)
+        end
     end
 
     def Combinaisons.straight(dice, options)
