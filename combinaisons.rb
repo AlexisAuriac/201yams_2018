@@ -63,7 +63,7 @@ module Combinaisons
     def Combinaisons.full(dice, options)
         if options.length != 2 or
             not /^[1-6]$/ =~ options[0] or
-            not /^[1-6]$/ =~ options[0]
+            not /^[1-6]$/ =~ options[1]
             STDERR.puts("Invalid options")
             exit(84)
         end
